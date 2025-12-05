@@ -1,0 +1,52 @@
+variables:
+  UV_VERSION: "0.5"
+  PYTHON_VERSION: "3.12"
+  BASE_LAYER: bookworm-slim
+  # GitLab CI creates a separate mountpoint for the build directory,
+  # so we need to copy instead of using hard links.
+  UV_LINK_MODE: copy
+
+stages:
+  - build
+  - lint
+  - test
+
+install_uv:
+  image: ghcr.io/astral-sh/uv:$UV_VERSION-python$PYTHON_VERSION-$BASE_LAYER
+  stage: build
+  variables:
+      UV_CACHE_DIR: .uv-cache
+  cache:
+    - key:
+        files:
+          - uv.lock
+      paths:
+        - $UV_CACHE_DIR
+  script:
+    - uv venv --seed # Create a virtual environment
+    # Install pytest and any other testing dependencies
+    - uv sync
+    - uv cache prune --ci
+
+
+lint:
+  image: ghcr.io/astral-sh/uv:$UV_VERSION-python$PYTHON_VERSION-$BASE_LAYER
+  stage: lint
+  before_script:
+    - uv add pre-commit
+    - apt update && apt install -y --no-install-recommends git
+  script:
+    - uv run pre-commit run --all-files
+
+test:
+  image: ghcr.io/astral-sh/uv:$UV_VERSION-python$PYTHON_VERSION-$BASE_LAYER
+  stage: test
+  before_script:
+    # Install pytest and any other testing dependencies
+    - uv add pytest pytest-cov
+  script:
+    # Run tests and generate a coverage report.
+    # The --cov-report=term-missing option prints the coverage summary to the console.
+    - uv run pytest --cov=src --cov-report=term-missing
+  # Add the coverage keyword with a regex to parse the output
+  coverage: '/^TOTAL\s+\d+\s+\d+\s+\d+\s+\d+\s+(?P<coverage>\d+)%$/'
