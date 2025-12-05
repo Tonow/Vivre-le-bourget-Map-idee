@@ -4,9 +4,9 @@ import pytest
 def f():
     raise SystemExit(1)
 
+
 def func(x):
     return x + 1
-
 
 
 def test_answer():
