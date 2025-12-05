@@ -1,4 +1,4 @@
-# Vivre le bourget Map idee
+# Vivre le bourget Map idee 🗺️💡
 
 [![pipeline status](https://gitlab.com/Tonow/vivre-le-bourget-map-idee/badges/main/pipeline.svg)](https://gitlab.com/Tonow/vivre-le-bourget-map-idee/-/commits/main)
 [![coverage report](https://gitlab.com/Tonow/vivre-le-bourget-map-idee/badges/main/coverage.svg)](https://gitlab.com/Tonow/vivre-le-bourget-map-idee/-/commits/main)
