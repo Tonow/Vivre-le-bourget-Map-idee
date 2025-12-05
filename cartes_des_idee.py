@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import folium
 from streamlit_folium import st_folium
-from settings import REQUIRED_COLS, THEME_COLORS_LIST
+from settings import REQUIRED_COLS, THEME_COLORS_LIST, COULEURS_FR
 
 # --- Configuration de la Page ---
 st.set_page_config(
@@ -61,7 +61,7 @@ if uploaded_file is not None:
         df = clean_gps_coordinates(df)
 
 
-        st.dataframe(df.head())
+        # st.dataframe(df.head())
 
 
 
@@ -74,7 +74,7 @@ if uploaded_file is not None:
         # Afficher la légende dans la barre latérale
         st.sidebar.subheader("Légende des Thèmes")
         legend_data = pd.DataFrame(
-            {'Thème': unique_themes, 'Couleur': [theme_to_color[t] for t in unique_themes]}
+            {'Thème': unique_themes, 'Couleur': [COULEURS_FR[theme_to_color[t]] for t in unique_themes]}
         )
         st.sidebar.dataframe(legend_data, hide_index=True)
 
