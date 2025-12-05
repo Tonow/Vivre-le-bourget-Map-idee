@@ -26,3 +26,7 @@ COULEURS_FR = {
     "darkgreen": "vert foncé",
     "cadetblue": "bleu gris",
 }
+
+ST_FOLIUM_HEIGHT = 500
+FOLIUM_POPUP_MAX_WIDTH = 300
+FOLIUM_MAP_ZOOM_START = 14

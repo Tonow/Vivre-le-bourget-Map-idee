@@ -2,7 +2,14 @@ import streamlit as st
 import pandas as pd
 import folium
 from streamlit_folium import st_folium
-from settings import REQUIRED_COLS, THEME_COLORS_LIST, COULEURS_FR
+from settings import (
+    REQUIRED_COLS,
+    THEME_COLORS_LIST,
+    COULEURS_FR,
+    ST_FOLIUM_HEIGHT,
+    FOLIUM_POPUP_MAX_WIDTH,
+    FOLIUM_MAP_ZOOM_START,
+)
 
 # --- Configuration de la Page ---
 st.set_page_config(
@@ -11,10 +18,10 @@ st.set_page_config(
     layout="wide",
 )
 
-st.title("📍 Carte Interactive des propositions au Bourget")
-st.markdown(
-    "Chaque marqueur a une couleur basée sur le **thème** et affiche la **suggestion** dans son pop-up."
-)
+st.title("📍 Carte des 💡")
+
+if "sidebar_state" not in st.session_state:
+    st.session_state.sidebar_state = "collapsed"
 
 # --- Téléchargement du Fichier CSV ---
 # uploaded_file = st.file_uploader(
@@ -102,7 +109,9 @@ if uploaded_file is not None:
         center_lon = df_filtered["lon"].mean()
 
         # Initialiser la carte
-        m = folium.Map(location=[center_lat, center_lon], zoom_start=15)
+        m = folium.Map(
+            location=[center_lat, center_lon], zoom_start=FOLIUM_MAP_ZOOM_START
+        )
 
         # 4. Ajout des Marqueurs (Pins) avec Pop-ups Personnalisés
 
@@ -119,7 +128,7 @@ if uploaded_file is not None:
             """
 
             # Création de l'objet Pop-up
-            popup = folium.Popup(popup_html, max_width=300)
+            popup = folium.Popup(popup_html, max_width=FOLIUM_POPUP_MAX_WIDTH)
 
             # Ajout du marqueur à la carte
             folium.Marker(
@@ -135,7 +144,7 @@ if uploaded_file is not None:
         st.subheader(f"Carte de {len(df_filtered)} Propositions Filtrées")
 
         # La fonction st_folium affiche la carte Folium dans Streamlit
-        st_folium(m, width=1400, height=1200)
+        st_folium(m, use_container_width=True, height=ST_FOLIUM_HEIGHT)
 
     except Exception as e:
         st.error(
