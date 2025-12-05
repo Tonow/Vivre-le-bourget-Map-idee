@@ -1,0 +1,41 @@
+[theme]
+
+# The theme that your custom theme inherits from.
+#
+# This can be one of the following:
+# - "light": Streamlit's default light theme.
+# - "dark" : Streamlit's default dark theme.
+# - A local file path to a TOML theme file: A local custom theme, like
+#   "themes/custom.toml".
+# - A URL to a TOML theme file: An externally hosted custom theme, like
+#   "https://example.com/theme.toml".
+#
+# A TOML theme file must contain a [theme] table with theme options.
+# Any theme options defined in the app's config.toml file will override
+# those defined in the TOML theme file.
+
+# Primary accent color.
+primaryColor = "#C65510"
+
+# Background color of the app.
+backgroundColor = "#F1EEE5"
+
+# Background color used for most interactive widgets.
+secondaryBackgroundColor = "#8BA7A4"
+
+# Color used for almost all text.
+textColor = "#232323"
+
+[theme.sidebar]
+
+# Primary accent color.
+primaryColor = "#C65510"
+
+# Background color of the app.
+backgroundColor = "#4D6B70"
+
+# Background color used for most interactive widgets.
+secondaryBackgroundColor = "#8BA7A4"
+
+# Color used for almost all text.
+textColor = "#F1EEE5"
