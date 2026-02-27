@@ -11,6 +11,15 @@
 
 ## 🚀 Getting Started
 
+### Requirements
+
+* install [uv](https://docs.astral.sh/uv/getting-started/installation/)
+* create virtual env `uv venv`
+* activate env `source .venv/bin/activate`
+* install requirement `uv pip install -r requirements.txt`
+* run the application `uv run streamlit run cartes_des_idee.py`
+
+
 ### Setting up Pre-commit Hooks
 
 This project uses **pre-commit** to ensure code quality and formatting are consistent across the team. To set up the hooks, make sure you have `pre-commit` installed and run the following command in your project directory:
